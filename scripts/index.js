@@ -7,6 +7,14 @@ const loadLessons = () => {
     .then((info) => displayLessons(info.data));
 };
 
+const removeActive = () =>{
+    const inactiveBtns = document.querySelectorAll(".lesson-btn")
+    // console.log(inactiveBtns);
+    inactiveBtns.forEach(btn => {
+        btn.classList.remove("active");
+    })
+}
+
 const displayLessons = (lessons) => {
   // console.log(lessons);
   const levelContainer = document.getElementById("level-container");
@@ -15,7 +23,7 @@ const displayLessons = (lessons) => {
   for (let lesson of lessons) {
     const btnDiv = document.createElement("div");
     btnDiv.innerHTML = `
-        <button onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-brands fa-leanpub"></i> Lesson -${lesson.level_no}</button>
+        <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn"><i class="fa-brands fa-leanpub"></i> Lesson -${lesson.level_no}</button>
         `;
     levelContainer.appendChild(btnDiv);
   }
@@ -27,11 +35,17 @@ const loadLevelWord = (id) => {
   // console.log(url);
   fetch(url)
     .then((res) => res.json())
-    .then((lvl) => displayLevelWord(lvl.data));
+    .then((lvl) => {
+        removeActive();
+        const clickedBtn = document.getElementById(`lesson-btn-${id}`)
+        // console.log(clickedBtn);
+        clickedBtn.classList.add("active");
+        displayLevelWord(lvl.data);
+    });
 };
 
 const displayLevelWord = (words) => {
-  console.log(words);
+//   console.log(words);
   const wordContainer = document.getElementById("word-container");
   wordContainer.innerHTML = "";
 
