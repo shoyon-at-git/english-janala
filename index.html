@@ -39,14 +39,14 @@
                     <ul tabindex="0"
                         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li>
-                        <a href="" class=""><i class="fa-solid fa-circle-question"></i> FAQ</a>
-                    </li>
-                    <li>
-                        <a href="" class=""><i class="fa-brands fa-leanpub"></i> Learn</a>
-                    </li>
-                    <li>
-                        <a href="" class=""><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
-                    </li>
+                            <a href="" class=""><i class="fa-solid fa-circle-question"></i> FAQ</a>
+                        </li>
+                        <li>
+                            <a href="" class=""><i class="fa-brands fa-leanpub"></i> Learn</a>
+                        </li>
+                        <li>
+                            <a href="" class=""><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        </li>
                     </ul>
                 </div>
                 <a href="index.html" class="flex items-center gap-1 cursor-pointer text-xl">
@@ -58,28 +58,49 @@
             <div class="navbar-end hidden lg:flex">
                 <ul class="menu menu-horizontal px-1 space-x-4">
                     <li>
-                        <a href="" class="btn btn-outline btn-primary"><i class="fa-solid fa-circle-question"></i> FAQ</a>
+                        <a href="" class="btn btn-outline btn-primary"><i class="fa-solid fa-circle-question"></i>
+                            FAQ</a>
                     </li>
                     <li>
                         <a href="" class="btn btn-outline btn-primary"><i class="fa-brands fa-leanpub"></i> Learn</a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-outline btn-primary"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        <a href="" class="btn btn-outline btn-primary"><i
+                                class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <section class="flex justify-between flex-col-reverse lg:flex-row gap-8 lg:gap-48 items-center py-5 w-11/12 mx-auto">
-        <div class="content border flex-1 text-center lg:text-left">
+    <section
+        class="flex justify-between flex-col-reverse lg:flex-row gap-8 lg:gap-48 items-center py-5 w-11/12 mx-auto">
+        <div class="content flex-1 text-center lg:text-left">
             <h2 class="text-4xl font-bold mb-8"><span class="text-sky-700">English</span> is Easy!!</h2>
-            <p class="font-bn">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+            <p class="font-bn">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে
+                চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
         </div>
-        <div class="image border flex-1">
+        <div class="image  flex-1">
             <img src="assets/hero-student.png" alt="">
         </div>
     </section>
+
+    <section class="w-11/12 mx-auto py-5">
+        <h2 class="text-4xl font-bold mb-8 text-center"><span class="text-sky-700">Let's</span> Learn Vocabularies</h2>
+        <div id="level-container" class="flex gap-5 flex-wrap justify-center">
+
+        </div>
+    </section>
+
+    <section id="word-container"
+        class="my-10 bg-gray-100 w-11/12 mx-auto px-4 py-5 grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div class="text-center col-span-full rounded-xl py-10 space-y-6">
+            <h2 class="font-bn text-xl font-medium text-gray-400">আপনি কোনো <span>Lesson select</span> করেন নি</h2>
+            <p class="font-bn font-bold text-4xl">একটি <span>Lesson select</span> করুন</p>
+        </div>
+    </section>
+
+    <script src="scripts/index.js"></script>
 </body>
 
 </html>
