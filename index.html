@@ -92,6 +92,21 @@
         </div>
     </section>
 
+    <section class="flex justify-center ">
+        <div class="search flex">
+            <div>
+                <label class="input validator search-item">
+                    <input id="input-search" type="text" placeholder="Search vocabulary" />
+                </label>
+            </div>
+            <button id="btn-search" class="btn btn-primary">Search</button>
+        </div>
+    </section>
+
+    <section id="spinner" class="flex justify-center items-center py-10 hidden">
+        <span class="loading loading-bars loading-xl"></span>
+    </section>
+
     <section id="word-container"
         class="my-10 bg-gray-100 w-11/12 mx-auto px-4 py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div class="text-center col-span-full rounded-xl py-10 space-y-6">
@@ -99,6 +114,19 @@
             <p class="font-bn font-bold text-4xl">একটি <span>Lesson select</span> করুন</p>
         </div>
     </section>
+
+    <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <div id="details-container" class="space-y-5">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <script src="scripts/index.js"></script>
 </body>

@@ -1,4 +1,25 @@
 // console.log("index.html loaded");
+const createSpans = (arr) =>{
+    const htmlEl = arr.map(el => `<span class="btn">${el}</span>`);
+    return htmlEl.join(" ");
+};
+
+const manageSpinner = (status) =>{
+    if(status){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("word-container").classList.add("hidden");
+    }
+    else{
+        document.getElementById("spinner").classList.add("hidden");
+        document.getElementById("word-container").classList.remove("hidden");
+    }
+};
+
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 
 const loadLessons = () => {
   const url = "https://openapi.programming-hero.com/api/levels/all";
@@ -31,6 +52,7 @@ const displayLessons = (lessons) => {
 
 const loadLevelWord = (id) => {
   // console.log(id);
+  manageSpinner(true)
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
   // console.log(url);
   fetch(url)
@@ -59,6 +81,8 @@ const displayLevelWord = (words) => {
              একটি <span>Lesson select</span> করুন</p>
         </div>
         `;
+        manageSpinner(false);
+
   }
 
   words.forEach((word) => {
@@ -72,13 +96,66 @@ const displayLevelWord = (words) => {
                 "${word.meaning ? word.meaning : `<span class="text-red-500">অর্থ পাওয়া যায় নি</span>`} / ${word.pronunciation ? word.pronunciation : '<span class="text-red-500">উচ্চারণ পাওয়া যায় নি</span>'}"
             </div>
             <div class="flex justify-between items-center">
-                <button class="btn bg-slate-100 hover:bg-slate-200"><i class="fa-solid fa-circle-info"></i></button>
-                <button class="btn bg-slate-100 hover:bg-slate-200"><i class="fa-solid fa-volume-high"></i></button>
+                <button onclick="loadWordDetails(${word.id})" class="btn bg-slate-100 hover:bg-slate-200"><i class="fa-solid fa-circle-info"></i></button>
+                <button onclick="pronounceWord('${word.word}')" class="btn bg-slate-100 hover:bg-slate-200"><i class="fa-solid fa-volume-high"></i></button>
             </div>
         </div>
     `;
     wordContainer.append(card);
   });
+    manageSpinner(false);
+
+};
+
+const loadWordDetails = async(id) =>{
+    const url = `https://openapi.programming-hero.com/api/word/${id}`
+    // console.log(url);
+    const res = await fetch(url);
+    const json = await res.json();
+    displayWordDetails(json.data);
+};
+
+const displayWordDetails = (details) =>{
+    console.log(details);
+    const detailBox = document.getElementById("details-container");
+    // console.log(detailBox);
+    detailBox.innerHTML = `
+    <div>
+            <h2 class="text-2xl font-bold">${details.word} (<i class="fa-solid fa-microphone-lines"></i>:${details.pronunciation})</h2>
+        </div>
+        <div>
+            <h2 class="font-bold">Meaning</h2>
+            <p class ="font-bn">${details.meaning}</p>
+        </div>
+        <div>
+            <h2 class="font-bold">Example</h2>
+            <p>${details.sentence}</p>
+        </div>
+        <div class="space-y-2">
+            <h2 class="font-bold">Synonym</h2>
+            <div>
+                ${createSpans(details.synonyms)}
+            </div>
+        </div>
+     `;
+    document.getElementById("word_modal").showModal();
 };
 
 loadLessons();
+
+document.getElementById("btn-search").addEventListener("click", () =>{
+    removeActive();
+    const input = document.getElementById("input-search");
+    const inputValue = input.value.trim().toLowerCase();
+    console.log(inputValue);
+    const url = "https://openapi.programming-hero.com/api/words/all";
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data.data);
+            const allWords = data.data;
+            // console.log(allWords);
+            const filteredWords = allWords.filter(word=> word.word.toLowerCase().includes(inputValue));
+            displayLevelWord(filteredWords);
+        });
+});
